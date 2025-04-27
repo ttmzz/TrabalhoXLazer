@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Rotina Semanal</title>
+  <style>
+
+    body {
+
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 {
+
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    
+    th, td {
+
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+      font-size: 1em;
+    }
+
+    th {
+
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+
+      background-color: #f1f1f1;
+    }
+
+    caption {
+
+      caption-side: top;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    /* Responsividade para celulares */
+
+    @media screen and (max-width: 600px) {
+
+      table, thead, tbody, th, td, tr {
+
+        display: block;
+        width: 100%;
+      }
+
+      thead {
+
+        display: none;
+      }
+
+      tr {
+
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ccc;
+      }
+
+      td {
+
+        text-align: left;
+        padding: 10px;
+        position: relative;
+      }
+
+      td::before {
+
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+      }
+    }
+
+    /* Responsividade para tablets (600px a 1024px) */
+
+    @media screen and (min-width: 601px) and (max-width: 1024px) {
+
+      th, td {
+
+        padding: 10px;
+        font-size: 0.9em;
+      }
+      
+      table {
+
+        width: 95%;
+        margin: 20px auto;
+      }
+
+      caption {
+
+        font-size: 1.1em;
+      }
+
+      td {
+
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      
+      tr {
+
+        margin-bottom: 10px;
+      }
+    }
+
+    /* Esconder as linhas de estudo quando o switch estiver desligado */
+
+    .dias-de-estudo {
+
+      display: none;
+    }
+
+    .switch-container {
+
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    /* Estilo do switch */
+
+    .switch {
+
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      border-radius: 50%;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: 0.4s;
+    }
+
+    input:checked + .slider {
+      background-color: #4CAF50;
+
+    }
+    
+    input:checked + .slider:before {
+
+      transform: translateX(26px);
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Rotina Semanal</h1>
+
+  <!-- Switch para alternar os dias de estudo -->
+
+  <div class="switch-container">
+    <label class="switch">
+      <input type="checkbox" id="toggleEstudo">
+      <span class="slider"></span>
+    </label>
+    <span>Mostrar/Esconder Dias de Estudo</span>
+  </div>
+
+  <table>
+
+    <caption>Segunda a Sábado</caption>
+
+    <thead>
+      <tr>
+        <th>Horário</th>
+        <th>Atividade</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr><td data-label="Horário">06:30 - 07:30</td><td data-label="Atividade">Acordar, higiene, café da manhã</td></tr>
+      <tr><td data-label="Horário">07:30 - 08:30</td><td data-label="Atividade">Preparar e sair para o trabalho</td></tr>
+      <tr><td data-label="Horário">09:00 - 17:00</td><td data-label="Atividade">Trabalho</td></tr>
+      <tr><td data-label="Horário">17:00 - 18:00</td><td data-label="Atividade">Deslocamento (volta pra casa)</td></tr>
+      <tr><td data-label="Horário">18:00 - 19:00</td><td data-label="Atividade">Tarefas domésticas</td></tr>
+      <tr><td data-label="Horário">19:00 - 19:30</td><td data-label="Atividade">Pausa, banho, jantar</td></tr>
+      <tr><td data-label="Horário">19:30 - 21:00</td><td data-label="Atividade">Estudo (3x por semana)</td></tr>
+      <tr><td data-label="Horário">21:00 - 22:00</td><td data-label="Atividade">Tempo livre / relaxamento</td></tr>
+      <tr><td data-label="Horário">22:00 - 06:30</td><td data-label="Atividade">Sono</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Dias de Estudo (serão ocultados/mostrados conforme switch) -->
+
+  <table class="dias-de-estudo">
+
+    <caption>Domingo</caption>
+
+    <thead>
+      <tr>
+        <th>Horário</th>
+        <th>Atividade</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr><td data-label="Horário">08:00 - 12:00</td><td data-label="Atividade">Acordar tranquilo, manhã livre</td></tr>
+      <tr><td data-label="Horário">13:00 - 15:00</td><td data-label="Atividade">Tarefas domésticas maiores</td></tr>
+      <tr><td data-label="Horário">15:00 - 21:30</td><td data-label="Atividade">Lazer, descanso, autocuidado</td></tr>
+      <tr><td data-label="Horário">21:30 - 22:00</td><td data-label="Atividade">Preparar para dormir</td></tr>
+      <tr><td data-label="Horário">22:00 - 06:30</td><td data-label="Atividade">Sono</td></tr>
+
+    </tbody>
+
+  </table>
+
+
+
+  <script>
+
+    // Função para alternar a visibilidade dos dias de estudo
+
+    const toggleEstudo = document.getElementById('toggleEstudo');
+    const diasDeEstudo = document.querySelectorAll('.dias-de-estudo');
+
+    toggleEstudo.addEventListener('change', function() {
+      diasDeEstudo.forEach(dia => {
+
+        if (this.checked) {
+          dia.style.display = 'table'; // Exibe os dias de estudo
+        } else {
+          dia.style.display = 'none'; // Esconde os dias de estudo
+        }
+      });
+    });
+    
+  </script>
+</body>
+</html>
+                                                       
